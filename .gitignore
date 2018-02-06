@@ -2,3 +2,4 @@ node_modules
 uploads
 npm-debug.log
 lint
+package-lock.json
