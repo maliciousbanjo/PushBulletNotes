@@ -10,6 +10,7 @@ You will need a [PushBullet](https://www.pushbullet.com/) app installed on your 
 
 ## Installing
 Clone this repository into your __modules__ folder: `git clone https://github.com/maliciousBanjo/PushBulletNotes.git`
+
 `cd PushBulletNotes` and run `npm install` to install the necessary dependencies.
 
 ## Using the module
