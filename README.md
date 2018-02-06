@@ -18,6 +18,12 @@ Clone this repository into your __modules__ folder: `git clone https://github.co
 
 `cd PushBulletNotes` and run `npm install` to install the necessary dependencies.
 
+## Dependencies
+   * [PushBullet](https://www.npmjs.com/package/pushbullet)
+
+## Development Status
+Maintained, will try to tweak according to user feedback.
+
 ## Using the module
 
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
