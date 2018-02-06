@@ -132,15 +132,6 @@ Module.register("PushBulletNotes", {
 		];
 	},
 
-	// Load translations files
-	getTranslations: function() {
-		//FIXME: This can be load a one file javascript definition
-		return {
-			en: "translations/en.json",
-			es: "translations/es.json"
-		};
-	},
-
 	cleanPayload: function(newPayload) {
 		var name = newPayload.application_name;
 		var title = newPayload.title;

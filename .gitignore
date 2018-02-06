@@ -3,3 +3,4 @@ uploads
 npm-debug.log
 lint
 package-lock.json
+Gruntfile.js
