@@ -7,6 +7,8 @@ This module is heavily drawn from GitHub user ronny3050's [Phone Notification Mi
 
 ![](demo_images/homescreen.png)
 
+![](demo_images/messages.png)
+
 
 ## API Token
 You will need a [PushBullet](https://www.pushbullet.com/) app installed on your device. Once you have the app set up on your phone, you can get a PushBullet Access Token token from your Account Settings.
