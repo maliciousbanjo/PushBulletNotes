@@ -82,7 +82,7 @@ Module.register("PushBulletNotes", {
 
 				var titleWrapper = document.createElement("td");
 				titleWrapper.className = "bright";
-				titleWrapper.innerHTML = (o.application_name == "sms") ? "" : name;
+				titleWrapper.innerHTML = (o.application_name == "sms") ? "" : o.title;
 				notificationWrapper.appendChild(titleWrapper);
 				wrapper.appendChild(notificationWrapper);
 

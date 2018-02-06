@@ -5,6 +5,9 @@ This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror
 This module will display new phone notifications onto your mirror using the PushBullet API.
 This module is heavily drawn from GitHub user ronny3050's [Phone Notification Mirror](https://github.com/ronny3050/phone-notification-mirror), which stopped working a little under 9 months ago after PushBullet made a major update to their API. The general design is similar, although it has been cleaned up and adapted to fit the new API.
 
+![](demo_images/homescreen.png)
+
+
 ## API Token
 You will need a [PushBullet](https://www.pushbullet.com/) app installed on your device. Once you have the app set up on your phone, you can get a PushBullet Access Token token from your Account Settings.
 
