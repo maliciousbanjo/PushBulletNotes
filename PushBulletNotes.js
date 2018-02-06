@@ -14,7 +14,6 @@ Module.register("PushBulletNotes", {
 		displayNotificationIcon: true,
 		displayMessage: true,
 		displayCount: false,
-		//alert: false,
 		fade: true,
 		maxCharacters: 50,
 	},
@@ -32,7 +31,7 @@ Module.register("PushBulletNotes", {
 	getDom: function() {
 		var wrapper = document.createElement("table");
 		wrapper.className = "small";
-		var that = this;
+		var self = this;
 
 		if (this.config.displayCount) { // Display the number of messages
 			var headerRow = document.createElement("tr");
@@ -55,13 +54,13 @@ Module.register("PushBulletNotes", {
 			var count = 0;
 
 			// Only display however many notifications are specified by the config
-			var self = this;
+			//var self = this;
 			this.payload.slice(0, this.config.numberOfNotifications).forEach(function(o) {
 				var name = o.application_name;
 				var notificationWrapper = document.createElement("tr");
 				notificationWrapper.className = "normal";
 
-				if (that.config.displayNotificationIcon) {
+				if (self.config.displayNotificationIcon) {
 					var iconWrapper = document.createElement("td");
 					iconWrapper.className = "icon";
 					var icon = document.createElement("span");
@@ -78,34 +77,29 @@ Module.register("PushBulletNotes", {
 
 				var nameWrapper = document.createElement("td");
 				nameWrapper.className = "bright";
-				if (o.application_name == "sms") {
-					nameWrapper.innerHTML = "";
-				}
-				else {
-					nameWrapper.innerHTML = name;
-				}
+				nameWrapper.innerHTML = (o.application_name == "sms") ? o.title : name; // If SMS, o.title is the contact name
 				notificationWrapper.appendChild(nameWrapper);
 
 				var titleWrapper = document.createElement("td");
 				titleWrapper.className = "bright";
-				titleWrapper.innerHTML = o.title;
+				titleWrapper.innerHTML = (o.application_name == "sms") ? "" : name;
 				notificationWrapper.appendChild(titleWrapper);
 				wrapper.appendChild(notificationWrapper);
 
-				if (that.config.displayMessage) {
+				if (self.config.displayMessage) {
 					var bodyWrapper = document.createElement("tr");
 					var bodyContentWrapper = document.createElement("td");
 					bodyContentWrapper.colSpan = "3";
 					bodyContentWrapper.className = "dimmed xsmall address";
-					bodyContentWrapper.innerHTML = o.body.substring(0, that.config.maxCharacters);
+					bodyContentWrapper.innerHTML = o.body.substring(0, self.config.maxCharacters);
 					bodyWrapper.appendChild(bodyContentWrapper);
 					wrapper.appendChild(bodyWrapper);
 				}
 
-				// Create fade effect.
-				if (that.config.fade) {
-					var startingPoint = that.payload.slice(0, that.config.numberOfNotifications).length * 0.25;
-					var steps = that.payload.slice(0, that.config.numberOfNotifications).length - startingPoint;
+				// Fade effect
+				if (self.config.fade) {
+					var startingPoint = self.payload.slice(0, self.config.numberOfNotifications).length * 0.25;
+					var steps = self.payload.slice(0, self.config.numberOfNotifications).length - startingPoint;
 					if (count >= startingPoint) {
 						var currentStep = count - startingPoint;
 						notificationWrapper.style.opacity = 1 - (1 / steps * currentStep);
