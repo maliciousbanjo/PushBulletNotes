@@ -11,9 +11,9 @@ Module.register("PushBulletNotes", {
 	defaults: {
 		accessToken: "",
 		numberOfNotifications: 5,
-		displayNotificationIcon: true,
-		displayMessage: true,
-		displayCount: false,
+		showNotificationIcon: true,
+		showMessage: true,
+		showCount: false,
 		fade: true,
 		maxCharacters: 50,
 	},
@@ -33,7 +33,7 @@ Module.register("PushBulletNotes", {
 		wrapper.className = "small";
 		var self = this;
 
-		if (this.config.displayCount) { // Display the number of messages
+		if (this.config.showCount) { // Display the number of messages
 			var headerRow = document.createElement("tr");
 			var headerData = document.createElement("td");
 			var headerDiv = document.createElement("div");
@@ -60,7 +60,7 @@ Module.register("PushBulletNotes", {
 				var notificationWrapper = document.createElement("tr");
 				notificationWrapper.className = "normal";
 
-				if (self.config.displayNotificationIcon) {
+				if (self.config.showNotificationIcon) {
 					var iconWrapper = document.createElement("td");
 					iconWrapper.className = "icon";
 					var icon = document.createElement("span");
@@ -86,7 +86,7 @@ Module.register("PushBulletNotes", {
 				notificationWrapper.appendChild(titleWrapper);
 				wrapper.appendChild(notificationWrapper);
 
-				if (self.config.displayMessage) {
+				if (self.config.showMessage) {
 					var bodyWrapper = document.createElement("tr");
 					var bodyContentWrapper = document.createElement("td");
 					bodyContentWrapper.colSpan = "3";
