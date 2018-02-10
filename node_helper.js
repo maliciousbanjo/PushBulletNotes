@@ -65,7 +65,7 @@ module.exports = NodeHelper.create({
 					package_name: push.package_name,
 					notification_id: push.notification_id
 				};
-				//console.log("Dismissal received, sending to mirror");
+				console.log("Dismissal received, sending to mirror");
 				self.sendSocketNotification("DISMISSAL", dismissal);
 			}
 		});
