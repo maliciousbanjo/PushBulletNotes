@@ -1,5 +1,3 @@
-/* global Module */
-
 /* Magic Mirror
  * Module: PushBulletNotes
  *
@@ -15,7 +13,8 @@ Module.register("PushBulletNotes", {
 		showMessage: true,
 		showCount: false,
 		fade: true,
-		maxCharacters: 50,
+		maxMsgCharacters: 50,
+		maxHeaderCharacters: 32
 	},
 
 	payload: [],
@@ -54,9 +53,21 @@ Module.register("PushBulletNotes", {
 			var count = 0;
 
 			// Only display however many notifications are specified by the config
-			//var self = this;
 			this.payload.slice(0, this.config.numberOfNotifications).forEach(function(o) {
-				var name = o.application_name;
+				var name = (o.application_name == "sms") ? o.title : o.application_name; // If SMS, o.title is the contact name
+				var title = (o.application_name == "sms") ? "" : o.title;
+
+				// Determine if the header texts need truncating
+				if (name.length + title.length > this.config.maxHeaderCharacters) {
+					var remainder = (name.length + title.length) - this.config.maxHeaderCharacters;
+					if (o.application_name == "sms") { // SMS Message
+						name = name.substring(0, name.length - (remainder + 1)) + "...";
+					}
+					else {
+						title = title.substring(0, title.length - (remainder + 1)) + "...";
+					}
+				}
+
 				var notificationWrapper = document.createElement("tr");
 				notificationWrapper.className = "normal";
 
@@ -77,12 +88,12 @@ Module.register("PushBulletNotes", {
 
 				var nameWrapper = document.createElement("td");
 				nameWrapper.className = "bright";
-				nameWrapper.innerHTML = (o.application_name == "sms") ? o.title : name; // If SMS, o.title is the contact name
+				nameWrapper.innerHTML = name;
 				notificationWrapper.appendChild(nameWrapper);
 
 				var titleWrapper = document.createElement("td");
 				titleWrapper.className = "bright";
-				titleWrapper.innerHTML = (o.application_name == "sms") ? "" : o.title;
+				titleWrapper.innerHTML = title;
 				notificationWrapper.appendChild(titleWrapper);
 				wrapper.appendChild(notificationWrapper);
 
@@ -91,7 +102,7 @@ Module.register("PushBulletNotes", {
 					var bodyContentWrapper = document.createElement("td");
 					bodyContentWrapper.colSpan = "3";
 					bodyContentWrapper.className = "dimmed xsmall address";
-					bodyContentWrapper.innerHTML = o.body.substring(0, self.config.maxCharacters);
+					bodyContentWrapper.innerHTML = o.body.substring(0, self.config.maxMsgCharacters);
 					bodyWrapper.appendChild(bodyContentWrapper);
 					wrapper.appendChild(bodyWrapper);
 				}
@@ -135,7 +146,6 @@ Module.register("PushBulletNotes", {
 			this.payload.forEach(function(m) {
 				// If application_name already exists, increment notification count
 				if (m.application_name === name && m.title === title) {
-					// m.count++
 					self.payload.splice(dupIndex, 1);
 				}
 				dupIndex++;

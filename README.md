@@ -42,7 +42,8 @@ var config = {
 				displayMessage: true,
 				displayCount: true,
 				fade: true,
-				maxCharacters: 50,
+				maxMsgCharacters: 50,
+				maxHeaderCharacters: 32
 			}
 		},
     ]
@@ -90,6 +91,18 @@ var config = {
 			<td>Show the notification count<br>
 				<br><b>Possible values:</b> <code>true</code> or <code>false</code>
 				<br><b>Default value:</b> <code>true</code>
+			</td>
+		</tr>
+		<tr>
+			<td><code>maxMsgCharacters</code></td>
+			<td>The maximum number of characters to show from the notification body<br>
+				<br><b>Default value:</b> <code>50</code>
+			</td>
+		</tr>
+		<tr>
+			<td><code>maxHeaderCharacters</code></td>
+			<td>The maximum number of characters to show from the notification header<br>
+				<br><b>Default value:</b> <code>32</code>
 			</td>
 		</tr>
 </table>

@@ -26,18 +26,25 @@ module.exports = NodeHelper.create({
 
 		stream.on("push", function(push){ // Push is a JSON
 			if (push.type === "sms_changed") { // Text message
-				var message = {
-					application_name: "sms",
-					package_name: "sms",
-					title: push.notifications[0].title,
-					body: push.notifications[0].body,
-					// Come back to this later, maybe make an independent window for a text profile
-					// It's too small to really be discernable of anything.
-					icon: (typeof(push.notifications[0].image_url) == "undefined" ? null : push.notifications[0].image_url)
+				if (push.notifications.length !== 0) {
+					var message = {
+						application_name: "sms",
+						package_name: "sms",
+						title: push.notifications[0].title,
+						body: push.notifications[0].body,
+						// Come back to this later, maybe make an independent window for a text profile
+						// It's too small to really be discernable of anything.
+						icon: (typeof(push.notifications[0].image_url) == "undefined" ? null : push.notifications[0].image_url)
+					}
+					//console.log(push);
+					console.log("SMS received, sending to mirror");
+					self.sendSocketNotification("SMS_MESSAGE", message);
 				}
-
-				console.log("SMS received, sending to mirror");
-				self.sendSocketNotification("SMS_MESSAGE", message);
+				else {
+					console.log("Dead Message");
+					//console.log(push);
+					// Do nothing
+				}
 			}
 			if (push.type === "mirror") { // Ordinary notification
 				var notification = {
@@ -49,6 +56,7 @@ module.exports = NodeHelper.create({
 					title: push.title,
 					body: push.body
 				};
+				//console.log(push);
 				console.log("Notification received, sending to mirror");
 				self.sendSocketNotification("NOTIFICATION", notification);
 			}
@@ -57,7 +65,7 @@ module.exports = NodeHelper.create({
 					package_name: push.package_name,
 					notification_id: push.notification_id
 				};
-				console.log("Dismissal received, sending to mirror");
+				//console.log("Dismissal received, sending to mirror");
 				self.sendSocketNotification("DISMISSAL", dismissal);
 			}
 		});
