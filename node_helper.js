@@ -25,6 +25,8 @@ module.exports = NodeHelper.create({
 		stream.connect();
 
 		stream.on("push", function(push){ // Push is a JSON
+			console.log("Push Received");
+			console.log(push);
 			if (push.type === "sms_changed") { // Text message
 				if (push.notifications.length !== 0) {
 					var message = {
@@ -36,13 +38,12 @@ module.exports = NodeHelper.create({
 						// It's too small to really be discernable of anything.
 						icon: (typeof(push.notifications[0].image_url) == "undefined" ? null : push.notifications[0].image_url)
 					}
-					//console.log(push);
 					console.log("SMS received, sending to mirror");
+					console.log(push);
 					self.sendSocketNotification("SMS_MESSAGE", message);
 				}
 				else {
 					console.log("Dead Message");
-					//console.log(push);
 					// Do nothing
 				}
 			}
@@ -56,7 +57,6 @@ module.exports = NodeHelper.create({
 					title: push.title,
 					body: push.body
 				};
-				//console.log(push);
 				console.log("Notification received, sending to mirror");
 				self.sendSocketNotification("NOTIFICATION", notification);
 			}
