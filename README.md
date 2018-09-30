@@ -26,7 +26,7 @@ Clone this repository into your __modules__ folder: `git clone https://github.co
    * [PushBullet](https://www.npmjs.com/package/pushbullet)
 
 ## Development Status
-Maintained, will try to tweak according to user feedback.
+No longer in development.
 
 ## Using the module
 
