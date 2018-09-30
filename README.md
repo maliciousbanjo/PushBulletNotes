@@ -1,3 +1,7 @@
+# This module is deprecated
+No longer in development. PushBullet's API is rapidly-changing and is a pain to make work across *all* devices.
+I highly recommend [basknol's](https://github.com/basknol) [MMM-PushBulletNotifications](https://github.com/basknol/MMM-PushBulletNotifications) module.
+
 # Module: PushBulletNotes
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
